@@ -6,10 +6,13 @@
     alias dkil='docker kill'
 }
 [[ -n $(command -v "docker-compose") ]] && {
-    alias dcps='docker-compose ps'
+    alias dcdown='docker-compose down'
+    alias dcex='docker-compose exec'
+    alias dclog='docker-compose log'
+    alias dclf='docker-compose log -f'
     alias dcstop='docker-compose stop'
     alias dcstart='docker-compose start'
+    alias dcps='docker-compose ps'
     alias dcup='docker-compose up -d'
-    alias dcd='docker-compose down'
-    alias dcex='docker-compose exec'
+    alias dcrm='docker-compose rm'
 }

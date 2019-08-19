@@ -32,7 +32,7 @@ else
     source ${EZ_HOME}/functions.bash
     source ${EZ_HOME}/enhanced.bash
     # Load custiom scripts
-    for file in $(/bin/ls $EZ_HOME/custom/); do
+    for file in $(/bin/ls $EZ_HOME/custom/ 2>/dev/null); do
         source ${EZ_HOME}/custom/${file}
     done 
 fi

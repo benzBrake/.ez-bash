@@ -11,4 +11,5 @@
     alias dcstart='docker-compose start'
     alias dcup='docker-compose up -d'
     alias dcd='docker-compose down'
+    alias dcex='docker-compose exec'
 }

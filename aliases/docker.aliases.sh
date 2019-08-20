@@ -8,8 +8,8 @@
 [[ -n $(command -v "docker-compose") ]] && {
     alias dcdown='docker-compose down'
     alias dcex='docker-compose exec'
-    alias dclog='docker-compose log'
-    alias dclf='docker-compose log -f'
+    alias dclog='docker-compose logs'
+    alias dclf='docker-compose logs -f'
     alias dcstop='docker-compose stop'
     alias dcstart='docker-compose start'
     alias dcps='docker-compose ps'

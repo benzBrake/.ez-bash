@@ -10,3 +10,5 @@ fi
 export DISPLAY=$(grep nameserver /etc/resolv.conf | awk '{print $2}'):0
 # 3.Run OpenSSH server
 [[ -f /usr/sbin/sshd ]] && [[ $(ps -ef | grep -v grep | grep /usr/sbin/sshd | wc -l) -eq 0 ]] && /usr/sbin/sshd
+# 4. Fix ls output
+alias ls='command ls --human-readable --group-directories-first --color=auto -I NTUSER.DAT\* -I ntuser.dat\* 2>/dev/null'

@@ -1,14 +1,34 @@
 #!/bin/bash
-# 1.Fix network issue
-export WSL_HOST_IP=$(grep nameserver /etc/resolv.conf | awk '{print $2}')
-CIDR=$(ip addr show eth0 | grep -Eo '(([1-9]{1,3}\.){1,3}[0-9]{1,3}/)([0-9]){1,2}' | awk -F '/' '{print $2}')
-if [[ $CIDR -ne 20 ]]; then
-    ifconfig eth0 netmask 255.255.240.0
-    ip route add default via ${WSL_HOST_IP} 
+###
+ # @Author: Ryan
+ # @Date: 2021-02-26 08:52:38
+ # @LastEditTime: 2021-02-26 08:57:45
+ # @LastEditors: Ryan
+ # @Description: pyenv 国内优化插件
+ # @FilePath: \VPSReady\.ez\plugins\wsl2.bash
+### 
+function __instpy() {
+    if [[ $# -eq 1 ]]; then
+        v=$1
+        [[ ! -f "$HOME/.pyenv/cache/Python-$v.tar.xz" ]] && wget "http://npm.taobao.org/mirrors/python/$v/Python-$v.tar.xz" -P "$HOME/.pyenv/cache/"
+        pyenv install "$v"
+    else
+        echo "Error: Wrong arguments"
+        echo "Usage: instpy [python version]"
+    fi
+}
+function __listpyol() {
+    if [[ $# -eq 1 ]]; then
+        pyenv install --list | grep "$1"
+    else
+        pyenv install --list
+    fi
+}
+if [[ ! -f $HOME/.pyenv/bin/pyenv ]]; then
+    printf "Program pyenv is not found on this system.\n"
+    printf "You can disable ez-bash plugin pyenv.\n"
+else
+    alias lspy='pyenv versions'         # List installed pythons' version
+    alias lspyol='__listpyol'           # List pythons avaliable online
+    alias instpy='__instpy'             # Install specify version of python
 fi
-# 2.Set display environment
-export DISPLAY=$(grep nameserver /etc/resolv.conf | awk '{print $2}'):0
-# 3.Run OpenSSH server
-[[ -f /usr/sbin/sshd ]] && [[ $(ps -ef | grep -v grep | grep /usr/sbin/sshd | wc -l) -eq 0 ]] && /usr/sbin/sshd
-# 4. Fix ls output
-alias ls='command ls --human-readable --group-directories-first --color=auto -I NTUSER.DAT\* -I ntuser.dat\* 2>/dev/null'

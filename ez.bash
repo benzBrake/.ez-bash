@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
-if [ ${0##*/} == ${BASH_SOURCE[0]##*/} ]; then 
+###
+# @Author: Ryan
+# @Date: 2021-02-25 19:45:36
+ # @LastEditTime: 2021-02-26 08:46:23
+ # @LastEditors: Ryan
+# @Description:
+ # @FilePath: \VPSReady\.ez\ez.bash
+###
+if [ ${0##*/} == ${BASH_SOURCE[0]##*/} ]; then
     echo "WARNING"
     echo "This script is not meant to be executed directly!"
     echo "Use this script only by sourcing it."
@@ -8,31 +16,29 @@ if [ ${0##*/} == ${BASH_SOURCE[0]##*/} ]; then
 fi
 # Function defined
 # Init env
-if [[ -z ${EZ_HOME} ]]; then
+if [[ -z "${EZ_HOME}" ]]; then
     echo "ERROR"
-    echo "ENV EZ_HOME not exists."
-    echo "Please set EZ_HOME to make ez-bash avaliable."
-    echo
+    echo "ENV EZ_HOME not exists. ez-bash would not be run."
 else
     # Load theme
-    if [[ ! -z ${EZ_THEME} ]]; then
-        if [[ -f ${EZ_HOME}/themes/${EZ_THEME}/${EZ_THEME}.bash ]]; then
-            source ${EZ_HOME}/themes/${EZ_THEME}/${EZ_THEME}.bash
-        fi
+    EZ_THEME=${EZ_THEME-agnoster}
+    if [[ -f ${EZ_HOME}/themes/${EZ_THEME}/${EZ_THEME}.bash ]]; then
+        . ${EZ_HOME}/themes/${EZ_THEME}/${EZ_THEME}.bash
     fi
+
     # Load aliases
-    for file in $(/bin/ls $EZ_HOME/aliases/); do
-        source ${EZ_HOME}/aliases/${file}
+    for file in $(/bin/ls ${EZ_HOME}/aliases/); do
+        . ${EZ_HOME}/aliases/${file}
     done
     # Load plugins
     for plugin in ${EZ_PLUGINS}; do
-	source ${EZ_HOME}/plugins/${plugin}.bash
+        . ${EZ_HOME}/plugins/${plugin}.bash
     done
     # Load functions
-    source ${EZ_HOME}/functions.bash
-    source ${EZ_HOME}/enhanced.bash
+    . ${EZ_HOME}/functions.bash
     # Load custiom scripts
     for file in $(/bin/ls $EZ_HOME/custom/ 2>/dev/null); do
-        source ${EZ_HOME}/custom/${file}
-    done 
+        . ${EZ_HOME}/custom/${file}
+    done
+    . ${EZ_HOME}/post.bash
 fi

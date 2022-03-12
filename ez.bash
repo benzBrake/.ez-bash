@@ -1,12 +1,4 @@
 #!/usr/bin/env bash
-###
-# @Author: Ryan
-# @Date: 2021-02-25 19:45:36
- # @LastEditTime: 2021-02-26 08:46:23
- # @LastEditors: Ryan
-# @Description:
- # @FilePath: \VPSReady\.ez\ez.bash
-###
 if [ ${0##*/} == ${BASH_SOURCE[0]##*/} ]; then
     echo "WARNING"
     echo "This script is not meant to be executed directly!"

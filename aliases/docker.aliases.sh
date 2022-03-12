@@ -1,12 +1,4 @@
 #!/usr/bin/env bash
-###
- # @Author: Ryan
- # @Date: 2021-02-26 08:34:46
- # @LastEditTime: 2021-02-26 08:44:02
- # @LastEditors: Ryan
- # @Description: Docker 缩写
- # @FilePath: \VPSReady\.ez\aliases\docker.aliases.sh
-###
 # Docker 缩写
 [[ -n $(command -v "ps") ]] && {
     alias dps='docker ps'

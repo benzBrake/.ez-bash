@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
-###
- # @Author: Ryan
- # @Date: 2021-02-26 08:45:51
- # @LastEditTime: 2021-02-26 08:46:34
- # @LastEditors: Ryan
- # @Description: 最后载入的脚本
- # @FilePath: \VPSReady\.ez\post.bash
+# @Description: 最后载入的脚本
 ### 
 # remove background colors from dircolors
 eval "$(dircolors -p | \

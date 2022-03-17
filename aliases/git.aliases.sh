@@ -5,7 +5,7 @@ if [ -n "$(command -v git)" ]; then
     alias gc='git commit -v'
     alias gd='git diff'
     alias gst='git status'
-    alias gcl='git gcl'
+    alias gcl='git clone'
     alias gch='git checkout'
     alias gcm='git checkout master'
     alias gps='git push'

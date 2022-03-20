@@ -9,16 +9,20 @@
 }
 # Docker Compose 缩写
 [[ -n $(command -v "docker-compose") ]] && {
-    alias dc='docker-compose'
-    alias dcd='docker-compose down'
-    alias dcr='docker-compose exec'
-    alias dcl='docker-compose logs'
-    alias dclf='docker-compose logs -f'
-    alias dcstop='docker-compose stop'
-    alias dcstart='docker-compose start'
-    alias dcps='docker-compose ps'
-    alias dcup='docker-compose up'
-    alias dcupd='docker-compose up -d'
-    alias dcrm='docker-compose rm'
-    alias dcrmf='docker-compose rm -f'
+    if [ "$DOCKER_COMPOSE_COMPATIBILITY" == true  ]; then
+	alias dc='docker-compose --compatibility'
+    else
+        alias dc='docker-compose'
+    fi
+    alias dcd='dc down'
+    alias dcr='dc exec'
+    alias dcl='dc logs'
+    alias dclf='dc logs -f'
+    alias dcstop='dc stop'
+    alias dcstart='dc start'
+    alias dcps='dc ps'
+    alias dcup='dc up'
+    alias dcupd='dc up -d'
+    alias dcrm='dc rm'
+    alias dcrmf='dc rm -f'
 }

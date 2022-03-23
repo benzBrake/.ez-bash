@@ -14,7 +14,7 @@ benzBrake 自用 bash 功能扩充
 ```shell
 cd ~
 git clone https://github.com/benzBrake/.ez-bash.git
-chmod +x .ez-bash/*.bash .ez-bash/*/*.bash
+chmod +x .ez-bash/*.bash .ez-bash/*/*.bash .ez-bash/*/*.sh
 ```
 ### 启用 .ez-bash
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 function instcert() {
     if [ ! -f ~/.acme.sh ]; then
 	echo Please Install acme.sh first!

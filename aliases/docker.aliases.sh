@@ -8,14 +8,7 @@
     function dci() {
         docker images | grep none | awk '{print $3}' | xargs docker rmi
     }
-}
-# Docker Compose 缩写
-[[ -n $(command -v "docker-compose") ]] && {
-    if [ "$DOCKER_COMPOSE_COMPATIBILITY" == true ]; then
-        alias dc='docker-compose --compatibility'
-    else
-        alias dc='docker-compose'
-    fi
+    alias dc='docker compose'
     alias dcd='dc down'
     alias dcr='dc exec'
     alias dcl='dc logs'

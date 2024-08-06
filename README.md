@@ -1,11 +1,3 @@
-<!--
- * @Author: Ryan
- * @Date: 2021-02-26 08:58:23
- * @LastEditTime: 2021-02-26 08:58:55
- * @LastEditors: Ryan
- * @Description: 
- * @FilePath: \VPSReady\.ez\README.md
--->
 # .ez-bash
 benzBrake 自用 bash 功能扩充
 
@@ -26,3 +18,5 @@ export EZ_PLUGINS=""
 . ~/.ez-bash/ez.bash
 ```
 重新打开 shell 即可启用
+
+PS: agnoster 主题需要安装 powerline 字体，比如 Cascadia Mono PL。

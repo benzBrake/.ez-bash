@@ -18,21 +18,26 @@ else
         . ${EZ_HOME}/themes/${EZ_THEME}/${EZ_THEME}.bash
     fi
 
+    shopt -s nullglob
+
     # Load aliases
-    for file in $(/bin/ls ${EZ_HOME}/aliases/); do
-        . ${EZ_HOME}/aliases/${file}
+    for file in ${EZ_HOME}/aliases/*; do
+        source ${file}
     done
+
     # Load plugins
     for plugin in ${EZ_PLUGINS}; do
         if [[ -f ${EZ_HOME}/plugins/${plugin}.bash ]]; then
-            . ${EZ_HOME}/plugins/${plugin}.bash
+            source ${EZ_HOME}/plugins/${plugin}.bash
         fi
     done
-    # Load functions
-    . ${EZ_HOME}/functions.bash
-    # Load custiom scripts
-    for file in $(/bin/ls $EZ_HOME/custom/ 2>/dev/null); do
-        . ${EZ_HOME}/custom/${file}
+
+    # Load custom scripts
+    for file in ${EZ_HOME}/custom/*; do
+        source ${file}
     done
+
+    shopt -u nullglob
+
     . ${EZ_HOME}/post.bash
 fi

@@ -24,7 +24,9 @@ else
     done
     # Load plugins
     for plugin in ${EZ_PLUGINS}; do
-        . ${EZ_HOME}/plugins/${plugin}.bash
+        if [[ -f ${EZ_HOME}/plugins/${plugin}.bash ]]; then
+            . ${EZ_HOME}/plugins/${plugin}.bash
+        fi
     done
     # Load functions
     . ${EZ_HOME}/functions.bash

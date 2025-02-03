@@ -13,7 +13,7 @@ if [[ -z "${EZ_HOME}" ]]; then
     echo "ENV EZ_HOME not exists. ez-bash would not be run."
 else
     # Load theme
-    EZ_THEME=${EZ_THEME-agnoster}
+    EZ_THEME=${EZ_THEME-benz}
     if [[ -f ${EZ_HOME}/themes/${EZ_THEME}/${EZ_THEME}.bash ]]; then
         . ${EZ_HOME}/themes/${EZ_THEME}/${EZ_THEME}.bash
     fi

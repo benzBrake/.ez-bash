@@ -22,23 +22,34 @@ if command -v docker &>/dev/null; then
     # 清理 <none> 镜像
     dci() { docker images | awk '$1=="<none>"{print $3}' | xargs -r docker rmi; }
 
-    # --- compose 别名（自动兼容 v1 / v2） ---
-    COMPOSE_CMD=$(__find_compose_cmd)
-    if [[ -n $COMPOSE_CMD ]]; then
+    # --- compose 别名（自动兼容 v1 / v2，动态检测） ---
+    # 通用 dispatcher，每次调用时动态检测 compose 命令
+    __dc_dispatcher() {
+        local cmd=$(__find_compose_cmd)
+        if [[ -n "$cmd" ]]; then
+            $cmd "$@"
+        else
+            echo "Error: docker-compose not installed" >&2
+            return 1
+        fi
+    }
+
+    # 检测是否有可用的 compose 命令（避免无用的别名定义）
+    if [[ -n $(__find_compose_cmd) ]]; then
         # 用 eval 一次性生成所有 compose 别名，以后加命令只改这里
         eval "
-            alias dc='$COMPOSE_CMD'
-            alias dcd='$COMPOSE_CMD down'
-            alias dcr='$COMPOSE_CMD exec'
-            alias dcl='$COMPOSE_CMD logs'
-            alias dclf='$COMPOSE_CMD logs -f'
-            alias dcstop='$COMPOSE_CMD stop'
-            alias dcstart='$COMPOSE_CMD start'
-            alias dcps='$COMPOSE_CMD ps'
-            alias dcup='$COMPOSE_CMD up'
-            alias dcupd='$COMPOSE_CMD up -d'
-            alias dcrm='$COMPOSE_CMD rm'
-            alias dcrmf='$COMPOSE_CMD rm -f'
+            alias dc='__dc_dispatcher'
+            alias dcd='__dc_dispatcher down'
+            alias dcr='__dc_dispatcher exec'
+            alias dcl='__dc_dispatcher logs'
+            alias dclf='__dc_dispatcher logs -f'
+            alias dcstop='__dc_dispatcher stop'
+            alias dcstart='__dc_dispatcher start'
+            alias dcps='__dc_dispatcher ps'
+            alias dcup='__dc_dispatcher up'
+            alias dcupd='__dc_dispatcher up -d'
+            alias dcrm='__dc_dispatcher rm'
+            alias dcrmf='__dc_dispatcher rm -f'
         "
     fi
 fi

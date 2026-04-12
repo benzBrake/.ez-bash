@@ -36,10 +36,19 @@ if command -v docker &>/dev/null; then
 
     # 检测是否有可用的 compose 命令（避免无用的别名定义）
     if [[ -n $(__find_compose_cmd) ]]; then
+        dcd() {
+            if [[ $# -eq 0 ]]; then
+                __dc_dispatcher down
+                return
+            fi
+
+            __dc_dispatcher stop "$@" &&
+                __dc_dispatcher rm -f "$@"
+        }
+
         # 用 eval 一次性生成所有 compose 别名，以后加命令只改这里
         eval "
             alias dc='__dc_dispatcher'
-            alias dcd='__dc_dispatcher down'
             alias dcr='__dc_dispatcher exec'
             alias dcl='__dc_dispatcher logs'
             alias dclf='__dc_dispatcher logs -f'

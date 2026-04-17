@@ -18,3 +18,11 @@ function mcd() {
         echo mcd: too much operand
     fi
 }
+
+__ez_confirm() {
+    local prompt="${1:-Continue? [y/N] }"
+    local reply
+
+    read -r -p "$prompt" reply
+    [[ "$reply" =~ ^([yY][eE][sS]?|[yY])$ ]]
+}

@@ -5,5 +5,13 @@ if [ -n "$(command -v git)" ]; then
     alias gbr='git branch'
     alias gcam='git commit --amend --no-edit'
     alias gcamend='git commit --amend --no-edit'
-    alias grsth='git reset --hard HEAD'
+
+    grsth() {
+        __ez_confirm "Reset tracked changes in the current repo with 'git reset --hard HEAD'? [y/N] " || {
+            echo "Aborted."
+            return 1
+        }
+
+        command git reset --hard HEAD
+    }
 fi

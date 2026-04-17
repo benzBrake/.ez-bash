@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-uname -a | grep microsoft > /dev/null
-if [ "$?" -eq 0 ]; then
+if uname -a | grep -qi microsoft; then
     alias e.="explorer.exe ."
 fi
